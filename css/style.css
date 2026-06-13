@@ -1066,65 +1066,32 @@ body{
 
     .painelResumo{
 
-        grid-template-columns:
-            repeat(2,1fr);
-
-        gap:8px;
-
-        margin:10px auto 15px auto;
+        grid-template-columns: repeat(4,1fr);
+        gap:6px;
+        margin:8px auto 12px auto;
     }
 
     .cardResumo{
 
-        padding:10px;
-
-        border-radius:12px;
+        padding:6px;
+        border-radius:10px;
+        text-align:center;
     }
 
     .tituloResumo{
 
-        font-size:.60rem;
-
-        letter-spacing:0;
+        font-size:.45rem;
+        margin-bottom:2px;
+        line-height:1;
     }
 
     .valorResumo{
 
-        font-size:1.35rem;
-
-        font-weight:900;
+        font-size:.95rem;
+        font-weight:800;
+        line-height:1;
     }
-
-    /* .tituloResumo{
-
-        font-size:.65rem;
-    }
-
-    .valorResumo{
-
-        font-size:1.2rem;
-
-        margin-top:2px;
-    } */
-
 }
-
-/* .cardResumo{
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:18px;
-
-    text-align:center;
-
-    box-shadow:
-        0 4px 15px rgba(0,0,0,.12);
-
-    border-top:
-        4px solid #198754;
-} */
 
 .cardResumo{
 
@@ -1141,8 +1108,8 @@ body{
     box-shadow:
         0 4px 15px rgba(0,0,0,.12);
 
-    /* border-top:
-        4px solid #198754; */
+    border-top:
+        4px solid #198754;
 }
 
 .tituloResumo{
@@ -1167,4 +1134,10 @@ body{
     font-weight:900;
 
     color:#212529;
+}
+
+@media (max-width:768px){
+    .painelResumo{
+        background: red !important;
+    }
 }
