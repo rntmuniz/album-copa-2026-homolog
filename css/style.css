@@ -1062,7 +1062,7 @@ body{
     max-width:1100px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 
     .painelResumo {
         grid-template-columns: repeat(4, 1fr);
@@ -1085,6 +1085,33 @@ body{
         font-size: 1.1rem;
         font-weight: 800;
         line-height: 1.2;
+    }
+} */
+
+@media (max-width: 768px) {
+
+    .painelResumo {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .cardResumo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 8px 10px;
+        border-radius: 10px;
+    }
+
+    .tituloResumo {
+        font-size: 0.65rem;
+    }
+
+    .valorResumo {
+        font-size: 1.3rem;
+        font-weight: 900;
     }
 }
 
