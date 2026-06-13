@@ -1119,27 +1119,21 @@ body{
 @media (max-width: 768px) {
 
     .painelResumo {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 
     .cardResumo {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 8px 10px;
-        border-radius: 10px;
+        padding: 8px 6px;
+        min-height: 60px;
     }
 
     .tituloResumo {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
 
     .valorResumo {
-        font-size: 1.3rem;
-        font-weight: 900;
+        font-size: 1.2rem;
     }
 }
 
