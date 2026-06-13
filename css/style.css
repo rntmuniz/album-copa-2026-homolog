@@ -1088,6 +1088,34 @@ body{
     }
 } */
 
+ /* barras  */
+/* @media (max-width: 768px) {
+
+    .painelResumo {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .cardResumo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 8px 10px;
+        border-radius: 10px;
+    }
+
+    .tituloResumo {
+        font-size: 0.65rem;
+    }
+
+    .valorResumo {
+        font-size: 1.3rem;
+        font-weight: 900;
+    }
+} */
+
 @media (max-width: 768px) {
 
     .painelResumo {
