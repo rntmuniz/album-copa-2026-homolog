@@ -1062,34 +1062,29 @@ body{
     max-width:1100px;
 }
 
-@media (max-width:768px){
+@media (max-width: 768px) {
 
-    .painelResumo{
-
-        grid-template-columns: repeat(4,1fr);
-        gap:6px;
-        margin:8px auto 12px auto;
+    .painelResumo {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin: 8px auto 12px auto;
     }
 
-    .cardResumo{
-
-        padding:6px;
-        border-radius:10px;
-        text-align:center;
+    .cardResumo {
+        padding: 6px 4px;
+        border-radius: 10px;
+        min-height: 70px;
     }
 
-    .tituloResumo{
-
-        font-size:.45rem;
-        margin-bottom:2px;
-        line-height:1;
+    .tituloResumo {
+        font-size: 0.55rem;
+        line-height: 1.1;
     }
 
-    .valorResumo{
-
-        font-size:.95rem;
-        font-weight:800;
-        line-height:1;
+    .valorResumo {
+        font-size: 1.1rem;
+        font-weight: 800;
+        line-height: 1.2;
     }
 }
 
@@ -1134,10 +1129,4 @@ body{
     font-weight:900;
 
     color:#212529;
-}
-
-@media (max-width:768px){
-    .painelResumo{
-        background: red !important;
-    }
 }
