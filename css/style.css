@@ -127,7 +127,7 @@ body {
 
 .selecao {
 
-    font-weight: 600;
+    font-weight: 900;
 
     margin-top: 20px;
 
@@ -148,14 +148,14 @@ body {
 
     gap: 10px;
 
-    font-size: 1.1rem;
+    font-size: 1.5rem;
 
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .bandeira {
 
-    width: 36px;
+    width: 42px;
 
     border-radius: 4px;
 
@@ -200,7 +200,7 @@ body {
 
     user-select: none;
 
-    font-weight: 600;
+    font-weight: 900;
 
     transition: .2s;
 
@@ -303,7 +303,7 @@ body {
 
     .bandeira {
 
-        width: 28px;
+        width: 36px;
     }
 
     .fig {
@@ -1199,4 +1199,45 @@ body{
     );
 
     transition:width .4s ease;
+}
+
+/* --- */
+
+/* .selecaoCompleta{
+
+    background:#e8f5e9 !important;
+
+    border:3px solid #198754 !important;
+
+    box-shadow:
+        0 0 15px rgba(25,135,84,.35);
+
+    transition:.3s;
+}
+
+.selecaoCompleta .tituloSelecao{
+
+    color:#198754;
+
+    font-weight:900;
+} */
+
+
+.selecaoCompleta{
+
+    background:#e8f5e9;
+
+    border:3px solid #d4af37;
+
+    box-shadow:
+        inset 0 0 12px rgba(255,215,0,.55),
+        inset 0 0 25px rgba(255,193,7,.35),
+        0 0 12px rgba(25,135,84,.25);
+
+    transition:.3s;
+}
+
+.selecaoCompleta h3::after{
+
+    content:" ✅";
 }

@@ -9,7 +9,7 @@ const grupos = {
     "B": ["Canadá", "Bósnia e Herzegovina", "Catar", "Suíça"],
     "C": ["Brasil", "Marrocos", "Haiti", "Escócia"],
     "D": ["Estados Unidos", "Paraguai", "Austrália", "Turquia"],
-    "E": ["Alemanha", "Curaçau", "Costa do Marfim", "Equador"],
+    "E": ["Alemanha", "Curaçao", "Costa do Marfim", "Equador"],
     "F": ["Holanda", "Japão", "Suécia", "Tunísia"],
     "G": ["Bélgica", "Egito", "Irã", "Nova Zelândia"],
     "H": ["Espanha", "Cabo Verde", "Arábia Saudita", "Uruguai"],
@@ -65,7 +65,7 @@ const bandeiras = {
     "Turquia": "tr",
 
     "Alemanha": "de",
-    "Curaçau": "cw",
+    "Curaçao": "cw",
     "Costa do Marfim": "ci",
     "Equador": "ec",
 
@@ -1446,6 +1446,25 @@ function atualizarContadoresSelecoes() {
                 );
 
             if (div) {
+
+const card =
+    div.closest(".selecao");
+
+if (card) {
+
+    if (coladas === 20) {
+
+        card.classList.add(
+            "selecaoCompleta"
+        );
+
+    } else {
+
+        card.classList.remove(
+            "selecaoCompleta"
+        );
+    }
+}
 
                 div.innerHTML = `
 
