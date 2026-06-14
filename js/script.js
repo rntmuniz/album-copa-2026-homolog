@@ -581,18 +581,18 @@ document.getElementById(
     //     .innerText =
     //     TOTAL_FIGURINHAS - total;
 
-      //   document.getElementById(
-      //       "percentualAlbum"
-      //   ).innerText =
-      //       percentualAlbum + "%";
+        document.getElementById(
+            "percentualAlbum"
+        ).innerText =
+            percentualAlbum + "%";
 
 document.getElementById(
     "percentualAlbumTexto"
-).textContent = percentual + "%";
+).textContent = percentualAlbum + "%";
 
 document.getElementById(
     "barraPercentual"
-).style.width = percentual + "%";
+).style.width = percentualAlbum + "%";
 
     // document.getElementById(
     //     "percentualFaltante"
