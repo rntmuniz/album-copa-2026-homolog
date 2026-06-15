@@ -1262,4 +1262,48 @@ body{
     white-space:pre-wrap;
 
     font-family:inherit;
+
+    white-space: normal;
+}
+
+
+/* -- html trocas */
+
+.blocoTroca{
+
+    background:#fff;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:10px;
+
+    margin-bottom:10px;
+
+    white-space: normal;
+}
+
+.tituloTroca{
+
+    font-size:1.1rem;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    color:#198754;
+
+    margin-bottom:6px;
+}
+
+.numerosTroca{
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    line-height:1.6;
+
+    white-space: normal;
 }

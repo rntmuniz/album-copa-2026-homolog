@@ -1160,6 +1160,202 @@ Object.values(grupos)
 
 // ---
 
+function gerarHtmlTrocas() {
+
+    let html = "";
+
+    const selecoes =
+        Object.values(grupos)
+            .flat()
+            .sort((a, b) =>
+                a.localeCompare(b)
+            );
+
+    html += `
+        <h4 class="mb-3">
+            🤝 TENHO PARA TROCAR
+        </h4>
+    `;
+
+    selecoes.forEach(selecao => {
+
+        let itens = [];
+
+        for (let i = 1; i <= 20; i++) {
+
+            const qtd =
+                Number(
+                    localStorage.getItem(
+                        `${selecao}-${i}-rep`
+                    )
+                ) || 0;
+
+            if (qtd > 0) {
+
+                itens.push(
+                    `${String(i)
+                        .padStart(2,'0')} (+${qtd})`
+                );
+            }
+        }
+
+        if (itens.length) {
+
+            html += `
+                <div
+                    class="blocoTroca tipoTenho">
+
+                    <div class="tituloTroca">
+
+                        ${selecao.toUpperCase()}
+
+                    </div>
+
+                    <div class="numerosTroca">
+
+                        ${itens.join(" • ")}
+
+                    </div>
+
+                </div>
+            `;
+        }
+    });
+
+    html += `
+        <h4 class="mt-4 mb-3">
+            🔍 PROCURO
+        </h4>
+    `;
+
+    selecoes.forEach(selecao => {
+
+        let faltantes = [];
+
+        for (let i = 1; i <= 20; i++) {
+
+            if (
+                localStorage.getItem(
+                    `${selecao}-${i}`
+                ) !== "1"
+            ) {
+
+                faltantes.push(
+                    String(i)
+                        .padStart(2,'0')
+                );
+            }
+        }
+
+        if (faltantes.length) {
+
+            html += `
+                <div
+                    class="blocoTroca tipoProcuro">
+
+                    <div class="tituloTroca">
+
+                        ${selecao.toUpperCase()}
+
+                    </div>
+
+                    <div class="numerosTroca">
+
+                        ${faltantes.join(" • ")}
+
+                    </div>
+
+                </div>
+            `;
+        }
+    });
+
+    return html;
+} 
+
+// ---
+
+function aplicarFiltroTrocas() {
+
+    const texto =
+        document
+            .getElementById(
+                "pesquisaTrocas"
+            )
+            .value
+            .toLowerCase();
+
+    const mostrarTenho =
+        document
+            .getElementById(
+                "filtroTenho"
+            )
+            .checked;
+
+    const mostrarProcuro =
+        document
+            .getElementById(
+                "filtroProcuro"
+            )
+            .checked;
+
+    document
+        .querySelectorAll(
+            ".blocoTroca"
+        )
+        .forEach(bloco => {
+
+            const ehTenho =
+                bloco.classList.contains(
+                    "tipoTenho"
+                );
+
+            const ehProcuro =
+                bloco.classList.contains(
+                    "tipoProcuro"
+                );
+
+            const atendeTipo =
+                (ehTenho && mostrarTenho)
+                ||
+                (ehProcuro && mostrarProcuro);
+
+            const atendeTexto =
+                bloco.textContent
+                    .toLowerCase()
+                    .includes(texto);
+
+            bloco.style.display =
+                atendeTipo &&
+                atendeTexto
+                ? ""
+                : "none";
+        });
+}
+
+document
+    .getElementById(
+        "pesquisaTrocas"
+    )
+    .oninput =
+    aplicarFiltroTrocas;
+
+document
+    .getElementById(
+        "filtroTenho"
+    )
+    .onchange =
+    aplicarFiltroTrocas;
+
+document
+    .getElementById(
+        "filtroProcuro"
+    )
+    .onchange =
+    aplicarFiltroTrocas;
+
+// ---
+
 const btnTrocas =
     document.getElementById(
         "menuTrocas"
@@ -1171,12 +1367,47 @@ if (btnTrocas) {
         "click",
         () => {
 
-            document
-                .getElementById(
-                    "listaTrocas"
-                )
-                .textContent =
-                gerarListaTrocas();
+            // document
+            //     .getElementById(
+            //         "listaTrocas"
+            //     )
+            //     .textContent =
+            //     gerarListaTrocas();
+
+document
+    .getElementById(
+        "listaTrocas"
+    )
+    .innerHTML =
+    gerarHtmlTrocas();
+
+const campoPesquisa =
+    document.getElementById(
+        "pesquisaTrocas"
+    );
+
+campoPesquisa.value = "";
+
+campoPesquisa.oninput = function () {
+
+    const filtro =
+        this.value.toLowerCase();
+
+    document
+        .querySelectorAll(
+            ".blocoTroca"
+        )
+        .forEach(bloco => {
+
+            bloco.style.display =
+                bloco.textContent
+                    .toLowerCase()
+                    .includes(filtro)
+                ? ""
+                : "none";
+        });
+};
+
 
             new bootstrap.Modal(
                 document.getElementById(
