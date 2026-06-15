@@ -546,13 +546,13 @@ function atualizarTotal() {
     const percentualFaltante =
         100 - percentualAlbum;
 
-const totalRepetidas =
-    calcularTotalRepetidas();
+    const totalRepetidas =
+        calcularTotalRepetidas();
 
-document.getElementById(
-    "totalRepetidas"
-).innerText =
-    totalRepetidas;
+    document.getElementById(
+        "totalRepetidas"
+    ).innerText =
+        totalRepetidas;
 
     // document.getElementById(
     //     "percentualAlbum"
@@ -581,43 +581,43 @@ document.getElementById(
     //     .innerText =
     //     TOTAL_FIGURINHAS - total;
 
-        document.getElementById(
-            "percentualAlbum"
-        ).innerText =
-            percentualAlbum + "%";
+    document.getElementById(
+        "percentualAlbum"
+    ).innerText =
+        percentualAlbum + "%";
 
-document.getElementById(
-    "percentualAlbumTexto"
-).textContent = percentualAlbum + "%";
+    document.getElementById(
+        "percentualAlbumTexto"
+    ).textContent = percentualAlbum + "%";
 
-document.getElementById(
-    "barraPercentual"
-).style.width = percentualAlbum + "%";
+    document.getElementById(
+        "barraPercentual"
+    ).style.width = percentualAlbum + "%";
 
     // document.getElementById(
     //     "percentualFaltante"
     // ).innerText =
     //     percentualFaltante + "%";
 
- document.getElementById(
-    "totalColadas"
-).innerText = total;
+    document.getElementById(
+        "totalColadas"
+    ).innerText = total;
 
-document.getElementById(
-    "totalFaltantes"
-).innerText =
-    TOTAL_FIGURINHAS - total;
+    document.getElementById(
+        "totalFaltantes"
+    ).innerText =
+        TOTAL_FIGURINHAS - total;
 
-// document.getElementById(
-//     "totalPercentual"
-// ).innerText =
-//     percentualAlbum + "%";
+    // document.getElementById(
+    //     "totalPercentual"
+    // ).innerText =
+    //     percentualAlbum + "%";
 
-// document.getElementById(
-//     "totalRestante"
-// ).innerText =
-//     percentualFaltante + "%";
- 
+    // document.getElementById(
+    //     "totalRestante"
+    // ).innerText =
+    //     percentualFaltante + "%";
+
     atualizarRanking();
 
     atualizarEspeciais();
@@ -1045,8 +1045,12 @@ function gerarListaTrocas() {
 
     let texto = "🤝 TENHO PARA TROCAR\n\n";
 
+    // Object.values(grupos)
+    //     .flat()
+    //     .forEach(selecao => {
     Object.values(grupos)
         .flat()
+        .sort((a, b) => a.localeCompare(b))
         .forEach(selecao => {
 
             let itens = [];
@@ -1070,11 +1074,26 @@ function gerarListaTrocas() {
 
             if (itens.length) {
 
+                // texto +=
+                //     `${selecao}\n`;
                 texto +=
-                    `${selecao}\n`;
+                    `${selecao.toUpperCase()}\n`;
 
-                texto +=
-                    itens.join("\n");
+                // texto +=
+                //     itens.join("\n");
+
+                const primeiraLinha =
+                    itens.slice(0, 10).join("   ");
+
+                const segundaLinha =
+                    itens.slice(10).join("   ");
+
+                texto += primeiraLinha;
+
+                if (segundaLinha) {
+
+                    texto += "\n" + segundaLinha;
+                }
 
                 texto += "\n\n";
             }
@@ -1083,9 +1102,13 @@ function gerarListaTrocas() {
     texto +=
         "\n🔍 PROCURO\n\n";
 
-    Object.values(grupos)
-        .flat()
-        .forEach(selecao => {
+    // Object.values(grupos)
+    //     .flat()
+    //     .forEach(selecao => {
+Object.values(grupos)
+    .flat()
+    .sort((a, b) => a.localeCompare(b))
+    .forEach(selecao => {
 
             let faltantes = [];
 
@@ -1106,11 +1129,27 @@ function gerarListaTrocas() {
 
             if (faltantes.length) {
 
-                texto +=
-                    `${selecao}\n`;
+                // texto +=
+                //     `${selecao}\n`;
 
                 texto +=
-                    faltantes.join(" ");
+                    `${selecao.toUpperCase()}\n`;
+
+                const primeiraLinha =
+                    faltantes.slice(0, 10).join("   ");
+
+                const segundaLinha =
+                    faltantes.slice(10).join("   ");
+
+                texto += primeiraLinha;
+
+                if (segundaLinha) {
+
+                    texto += "\n" + segundaLinha;
+                }
+
+                // texto +=
+                //     faltantes.join(" ");
 
                 texto += "\n\n";
             }
@@ -1447,24 +1486,24 @@ function atualizarContadoresSelecoes() {
 
             if (div) {
 
-const card =
-    div.closest(".selecao");
+                const card =
+                    div.closest(".selecao");
 
-if (card) {
+                if (card) {
 
-    if (coladas === 20) {
+                    if (coladas === 20) {
 
-        card.classList.add(
-            "selecaoCompleta"
-        );
+                        card.classList.add(
+                            "selecaoCompleta"
+                        );
 
-    } else {
+                    } else {
 
-        card.classList.remove(
-            "selecaoCompleta"
-        );
-    }
-}
+                        card.classList.remove(
+                            "selecaoCompleta"
+                        );
+                    }
+                }
 
                 div.innerHTML = `
 

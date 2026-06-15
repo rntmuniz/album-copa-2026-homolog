@@ -1250,3 +1250,16 @@ body{
 
     content:" ✅";
 }
+
+#listaTrocas{
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    line-height:1.6;
+
+    white-space:pre-wrap;
+
+    font-family:inherit;
+}
