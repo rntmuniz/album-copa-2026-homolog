@@ -36,99 +36,92 @@
 
 <body>
 
-<div class="banner-topo">
+    <div class="banner-topo">
 
-    <img
-        src="img/banner-topo.png"
-        alt="Álbum Copa do Mundo 2026">
+        <img src="img/banner-topo.png" alt="Álbum Copa do Mundo 2026">
 
-</div>
+    </div>
 
-<div class="painelResumo">
+    <div class="painelResumo">
 
-    <div class="cardResumo">
+        <div class="cardResumo">
 
-        <div class="tituloResumo">
-            ✅ Coladas
+            <div class="tituloResumo">
+                ✅ Coladas
+            </div>
+
+            <div id="totalColadas" class="valorResumo">
+
+                0
+
+            </div>
+
         </div>
 
-        <div id="totalColadas"
-             class="valorResumo">
+        <div class="cardResumo">
 
-            0
+            <div class="tituloResumo">
+                📌 Faltantes
+            </div>
+
+            <div id="totalFaltantes" class="valorResumo">
+
+                0
+
+            </div>
+
+        </div>
+
+        <div class="cardResumo cardProgresso">
+
+            <div class="tituloResumo">
+                📊 Progresso
+            </div>
+
+            <div id="percentualAlbum" class="valorResumo">
+
+                0%
+
+            </div>
+
+        </div>
+
+        <div class="cardResumo">
+
+            <div class="tituloResumo">
+                🔁 Repetidas
+            </div>
+
+            <div id="totalRepetidas" class="valorResumo">
+
+                0
+
+            </div>
+
+        </div>
+
+        <div class="progressoResumo">
+
+            <div class="progressoCabecalho">
+
+                <div class="tituloResumo">
+                    📊 Progresso
+                </div>
+                <span id="percentualAlbumTexto">0%</span>
+
+            </div>
+
+            <div class="barraProgresso">
+
+                <div id="barraPercentual" class="barraPreenchida">
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
-
-    <div class="cardResumo">
-
-        <div class="tituloResumo">
-            📌 Faltantes
-        </div>
-
-        <div id="totalFaltantes"
-             class="valorResumo">
-
-            0
-
-        </div>
-
-    </div>
-
-    <div class="cardResumo cardProgresso">
-
-        <div class="tituloResumo">
-            📊 Progresso
-        </div>
-
-        <div id="percentualAlbum"
-             class="valorResumo">
-
-            0%
-
-        </div>
-
-    </div>
-
-    <div class="cardResumo">
-
-        <div class="tituloResumo">
-            🔁 Repetidas
-        </div>
-
-        <div id="totalRepetidas"
-             class="valorResumo">
-
-            0
-
-        </div>
-
-    </div>
-
-<div class="progressoResumo">
-
-    <div class="progressoCabecalho">
-
-        <div class="tituloResumo">
-            📊 Progresso
-        </div>
-        <span id="percentualAlbumTexto">0%</span>
-
-    </div>
-
-    <div class="barraProgresso">
-
-        <div id="barraPercentual"
-             class="barraPreenchida">
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
 
     <button id="btnModoEdicao" class="btnModoEdicaoFlutuante" title="Ativar edição">
 
@@ -173,71 +166,6 @@
         </button>
 
         <div class="container py-4">
-
-            <!-- <div class="row mb-4 g-3">
-
-                <div class="col-md-6">
-
-                    <div class="card resumo-card">
-
-                        <div class="card-body text-center">
-
-                            <i class="fa-solid fa-check-circle icone-verde"></i>
-
-                            <h3 id="total">0</h3>
-
-                            <span>Figurinhas Coladas</span>
-
-                            <div class="barraResumo">
-
-                                <div id="barraAlbum" class="barraResumoInterna">
-                                </div>
-
-                            </div>
-
-                            <small id="percentualAlbum">
-
-                                0%
-
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-6">
-
-                    <div class="card resumo-card">
-
-                        <div class="card-body text-center">
-
-                            <i class="fa-solid fa-list icone-amarelo"></i>
-
-                            <h3 id="faltantes">980</h3>
-
-                            <span>Figurinhas Faltantes</span>
-
-                            <div class="barraResumo">
-
-                                <div id="barraFaltantes" class="barraResumoInterna barraFaltante">
-                                </div>
-
-                            </div>
-
-                            <small id="percentualFaltante">
-
-                                100%
-
-                            </small>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div> -->
 
             <div class="row mb-4">
 
@@ -438,57 +366,42 @@
                             </button>
 
                         </div>
-<div class="mb-3">
+                        <div class="mb-3">
 
-    <input
-        type="text"
-        id="pesquisaTrocas"
-        class="form-control"
-        placeholder="🔍 Pesquisar seleção ou figurinha">
+                            <input type="text" id="pesquisaTrocas" class="form-control"
+                                placeholder="🔍 Pesquisar seleção ou figurinha">
 
-</div>
+                        </div>
 
-<div class="mb-3">
+                        <div class="mb-3">
 
-    <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline">
 
-        <input
-            class="form-check-input"
-            type="checkbox"
-            id="filtroTenho"
-            checked>
+                                <input class="form-check-input" type="checkbox" id="filtroTenho" checked>
 
-        <label
-            class="form-check-label"
-            for="filtroTenho">
+                                <label class="form-check-label" for="filtroTenho">
 
-            Tenho para Trocar
+                                    Tenho para Trocar
 
-        </label>
+                                </label>
 
-    </div>
+                            </div>
 
-    <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline">
 
-        <input
-            class="form-check-input"
-            type="checkbox"
-            id="filtroProcuro"
-            checked>
+                                <input class="form-check-input" type="checkbox" id="filtroProcuro" checked>
 
-        <label
-            class="form-check-label"
-            for="filtroProcuro">
+                                <label class="form-check-label" for="filtroProcuro">
 
-            Procuro
+                                    Procuro
 
-        </label>
+                                </label>
 
-    </div>
+                            </div>
 
-</div>
+                        </div>
 
-<div id="listaTrocas"></div>
+                        <div id="listaTrocas"></div>
 
                     </div>
 
