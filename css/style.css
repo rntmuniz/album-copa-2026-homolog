@@ -631,7 +631,7 @@ body {
 
     position: fixed;
 
-    top: 255px;
+    top: 100px; /* posição do botão na vertical */
 
     bottom: 20px;
 
@@ -1128,6 +1128,11 @@ body {
     margin: 15px 0 8px 0;
 }
 
+#modalBoasVindas .modal-footer {
+
+    justify-content: center;
+}
+
 
 /* ========================= */
 /*         MOBILE            */
@@ -1239,4 +1244,5 @@ body {
 
     /* Modal */
 
+    
 }

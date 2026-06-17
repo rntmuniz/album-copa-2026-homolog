@@ -993,6 +993,31 @@ if (btnRepetidas) {
     );
 }
 
+// ---
+
+const btnAjuda =
+    document.getElementById(
+        "menuAjuda"
+    );
+
+if (btnAjuda) {
+
+    btnAjuda.addEventListener(
+        "click",
+        () => {
+
+            new bootstrap.Modal(
+                document.getElementById(
+                    "modalBoasVindas"
+                )
+            ).show();
+
+        }
+    );
+}
+
+// ---
+
 function gerarListaTrocas() {
 
     let texto = "🤝 TENHO PARA TROCAR\n\n";
@@ -2263,6 +2288,33 @@ function calcularTotalRepetidas() {
 
     return total;
 }
+
+// ---
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const jaViuTutorial =
+            localStorage.getItem(
+                "tutorialAlbum2026"
+            );
+
+        if (!jaViuTutorial) {
+
+            new bootstrap.Modal(
+                document.getElementById(
+                    "modalBoasVindas"
+                )
+            ).show();
+
+            localStorage.setItem(
+                "tutorialAlbum2026",
+                "1"
+            );
+        }
+    }
+);
 
 // ---
 
