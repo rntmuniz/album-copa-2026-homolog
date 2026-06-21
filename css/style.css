@@ -293,7 +293,12 @@ body {
     overflow: hidden;
 }
 
+
 .barraInterna {
+
+    height: 100%;
+
+min-height: 18px;
 
     display: flex;
 
@@ -307,9 +312,11 @@ body {
 
     color: white;
 
-    background: linear-gradient(90deg,
-            #2ecc71,
-            #27ae60);
+    background: linear-gradient(
+        90deg,
+        #2ecc71,
+        #27ae60
+    );
 
     transition: width .3s;
 }
