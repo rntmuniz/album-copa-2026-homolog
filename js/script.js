@@ -37,73 +37,95 @@ function carregarSelecoesCombo() {
 
             combo.innerHTML += `
                 <option value="${selecao}">
-                    ${selecao}
+                    ${nomeSelecao(selecao)}
                 </option>
             `;
         });
 }
 
-const bandeiras = {
-    "México": "mx",
-    "África do Sul": "za",
-    "Coreia do Sul": "kr",
-    "República Tcheca": "cz",
 
-    "Canadá": "ca",
-    "Bósnia e Herzegovina": "ba",
-    "Catar": "qa",
-    "Suíça": "ch",
+// ---
 
-    "Brasil": "br",
-    "Marrocos": "ma",
-    "Haiti": "ht",
-    "Escócia": "gb-sct",
+const selecoesInfo = {
+    "México": { fifa: "MEX", bandeira: "mx" },
+    "África do Sul": { fifa: "RSA", bandeira: "za" },
+    "Coreia do Sul": { fifa: "KOR", bandeira: "kr" },
+    "República Tcheca": { fifa: "CZE", bandeira: "cz" },
 
-    "Estados Unidos": "us",
-    "Paraguai": "py",
-    "Austrália": "au",
-    "Turquia": "tr",
+    "Canadá": { fifa: "CAN", bandeira: "ca" },
+    "Bósnia e Herzegovina": { fifa: "BIH", bandeira: "ba" },
+    "Catar": { fifa: "QAT", bandeira: "qa" },
+    "Suíça": { fifa: "SUI", bandeira: "ch" },
 
-    "Alemanha": "de",
-    "Curaçao": "cw",
-    "Costa do Marfim": "ci",
-    "Equador": "ec",
+    "Brasil": { fifa: "BRA", bandeira: "br" },
+    "Marrocos": { fifa: "MAR", bandeira: "ma" },
+    "Haiti": { fifa: "HAI", bandeira: "ht" },
+    "Escócia": { fifa: "SCO", bandeira: "gb-sct" },
 
-    "Holanda": "nl",
-    "Japão": "jp",
-    "Suécia": "se",
-    "Tunísia": "tn",
+    "Estados Unidos": { fifa: "USA", bandeira: "us" },
+    "Paraguai": { fifa: "PAR", bandeira: "py" },
+    "Austrália": { fifa: "AUS", bandeira: "au" },
+    "Turquia": { fifa: "TUR", bandeira: "tr" },
 
-    "Bélgica": "be",
-    "Egito": "eg",
-    "Irã": "ir",
-    "Nova Zelândia": "nz",
+    "Alemanha": { fifa: "GER", bandeira: "de" },
+    "Curaçao": { fifa: "CUW", bandeira: "cw" },
+    "Costa do Marfim": { fifa: "CIV", bandeira: "ci" },
+    "Equador": { fifa: "ECU", bandeira: "ec" },
 
-    "Espanha": "es",
-    "Cabo Verde": "cv",
-    "Arábia Saudita": "sa",
-    "Uruguai": "uy",
+    "Holanda": { fifa: "NED", bandeira: "nl" },
+    "Japão": { fifa: "JPN", bandeira: "jp" },
+    "Suécia": { fifa: "SWE", bandeira: "se" },
+    "Tunísia": { fifa: "TUN", bandeira: "tn" },
 
-    "França": "fr",
-    "Senegal": "sn",
-    "Iraque": "iq",
-    "Noruega": "no",
+    "Bélgica": { fifa: "BEL", bandeira: "be" },
+    "Egito": { fifa: "EGY", bandeira: "eg" },
+    "Irã": { fifa: "IRN", bandeira: "ir" },
+    "Nova Zelândia": { fifa: "NZL", bandeira: "nz" },
 
-    "Argentina": "ar",
-    "Argélia": "dz",
-    "Áustria": "at",
-    "Jordânia": "jo",
+    "Espanha": { fifa: "ESP", bandeira: "es" },
+    "Cabo Verde": { fifa: "CPV", bandeira: "cv" },
+    "Arábia Saudita": { fifa: "KSA", bandeira: "sa" },
+    "Uruguai": { fifa: "URU", bandeira: "uy" },
 
-    "Portugal": "pt",
-    "RD Congo": "cd",
-    "Uzbequistão": "uz",
-    "Colômbia": "co",
+    "França": { fifa: "FRA", bandeira: "fr" },
+    "Senegal": { fifa: "SEN", bandeira: "sn" },
+    "Iraque": { fifa: "IRQ", bandeira: "iq" },
+    "Noruega": { fifa: "NOR", bandeira: "no" },
 
-    "Inglaterra": "gb-eng",
-    "Croácia": "hr",
-    "Gana": "gh",
-    "Panamá": "pa"
+    "Argentina": { fifa: "ARG", bandeira: "ar" },
+    "Argélia": { fifa: "ALG", bandeira: "dz" },
+    "Áustria": { fifa: "AUT", bandeira: "at" },
+    "Jordânia": { fifa: "JOR", bandeira: "jo" },
+
+    "Portugal": { fifa: "POR", bandeira: "pt" },
+    "RD Congo": { fifa: "COD", bandeira: "cd" },
+    "Uzbequistão": { fifa: "UZB", bandeira: "uz" },
+    "Colômbia": { fifa: "COL", bandeira: "co" },
+
+    "Inglaterra": { fifa: "ENG", bandeira: "gb-eng" },
+    "Croácia": { fifa: "CRO", bandeira: "hr" },
+    "Gana": { fifa: "GHA", bandeira: "gh" },
+    "Panamá": { fifa: "PAN", bandeira: "pa" }
 };
+
+function nomeSelecao(selecao) {
+
+    const info = selecoesInfo[selecao];
+
+    if (!info) {
+        return selecao;
+    }
+
+    return `${info.fifa} - ${selecao}`;
+}
+
+function urlBandeira(selecao) {
+
+    return `https://flagcdn.com/${selecoesInfo[selecao].bandeira}.svg`;
+
+}
+
+// ---
 
 function paraExpoente(numero) {
 
@@ -422,13 +444,12 @@ for (const grupo in grupos) {
         const titulo = document.createElement("h3");
 
         titulo.innerHTML = `
-            <img
-                class="bandeira"
-                src="https://flagcdn.com/${bandeiras[selecao]}.svg"
-                alt="${selecao}"
-                loading="lazy"
-            >
-            ${selecao}
+ <img
+    class="bandeira"
+    src="${urlBandeira(selecao)}"
+    alt="${selecao}"
+    loading="lazy"
+>           ${nomeSelecao(selecao)}
         `;
 
         const progresso =
@@ -689,7 +710,7 @@ function atualizarRanking() {
             <div class="cabecalho">
 
                 <span>
-                    ${item.selecao}
+                    ${nomeSelecao(item.selecao)} 
                 </span>
 
                 <span>
@@ -762,13 +783,13 @@ function atualizarEstatisticas(dados) {
 
         <div class="cardEstatistica">
             🥇 Melhor:
-            ${melhor.selecao}
+            ${nomeSelecao(melhor.selecao)}
             (${melhor.percentual}%)
         </div>
 
         <div class="cardEstatistica">
             📉 Menor:
-            ${pior.selecao}
+            ${nomeSelecao(pior.selecao)}
             (${pior.percentual}%)
         </div>
 
@@ -846,13 +867,13 @@ function atualizarListaRepetidas() {
 
         <h5>
 
-            <img
-                class="bandeira-modal"
-                src="https://flagcdn.com/${bandeiras[selecao]}.svg"
-                alt="${selecao}"
-            >
-
-            ${selecao}
+<img
+    class="bandeira"
+    src="${urlBandeira(selecao)}"
+    alt="${selecao}"
+    loading="lazy"
+>
+            ${nomeSelecao(selecao)}
 
         </h5>
 
@@ -1049,7 +1070,7 @@ function gerarListaTrocas() {
             if (itens.length) {
 
                 texto +=
-                    `${selecao.toUpperCase()}\n`;
+                    `${nomeSelecao(selecao).toUpperCase()}\n`;
 
                 const primeiraLinha =
                     itens.slice(0, 10).join("   ");
@@ -1096,7 +1117,7 @@ function gerarListaTrocas() {
             if (faltantes.length) {
 
                 texto +=
-                    `${selecao.toUpperCase()}\n`;
+                    `${nomeSelecao(selecao).toUpperCase()}\n`;
 
                 const primeiraLinha =
                     faltantes.slice(0, 10).join("   ");
@@ -1169,7 +1190,13 @@ function gerarHtmlTrocas() {
 
                     <div class="tituloTroca">
 
-                        ${selecao.toUpperCase()}
+<img
+    class="bandeira"
+    src="${urlBandeira(selecao)}"
+    alt="${selecao}"
+    loading="lazy"
+>
+                        ${nomeSelecao(selecao).toUpperCase()}
 
                     </div>
 
@@ -1219,7 +1246,13 @@ function gerarHtmlTrocas() {
 
                     <div class="tituloTroca">
 
-                        ${selecao.toUpperCase()}
+<img
+    class="bandeira"
+    src="${urlBandeira(selecao)}"
+    alt="${selecao}"
+    loading="lazy"
+>
+                        ${nomeSelecao(selecao).toUpperCase()}
 
                     </div>
 
