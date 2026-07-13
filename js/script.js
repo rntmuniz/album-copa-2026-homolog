@@ -155,47 +155,47 @@ function criarFigurinha(id, texto) {
 
     const div = document.createElement("div");
 
-// ----
+    // ----
 
-function abrirMenuRepetidas() {
+    function abrirMenuRepetidas() {
 
-    if (!modoEdicao) {
+        if (!modoEdicao) {
 
-        mostrarAvisoBloqueado(div);
+            mostrarAvisoBloqueado(div);
 
-        return;
+            return;
+        }
+
+        figurinhaAtual = id;
+        figurinhaDivAtual = div;
+
+        const qtd =
+            Number(
+                localStorage.getItem(
+                    `${id}-rep`
+                )
+            ) || 0;
+
+        document.getElementById(
+            "tituloRepetida"
+        ).innerText = texto;
+
+        document.getElementById(
+            "qtdRep"
+        ).innerText = qtd;
+
+        const menu =
+            document.getElementById(
+                "popUpRepetidas"
+            );
+
+        menu.style.left = "50%";
+        menu.style.top = "50%";
+        menu.style.transform = "translate(-50%, -50%)";
+        menu.style.display = "block";
     }
 
-    figurinhaAtual = id;
-    figurinhaDivAtual = div;
-
-    const qtd =
-        Number(
-            localStorage.getItem(
-                `${id}-rep`
-            )
-        ) || 0;
-
-    document.getElementById(
-        "tituloRepetida"
-    ).innerText = texto;
-
-    document.getElementById(
-        "qtdRep"
-    ).innerText = qtd;
-
-    const menu =
-        document.getElementById(
-            "popUpRepetidas"
-        );
-
-    menu.style.left = "50%";
-    menu.style.top = "50%";
-    menu.style.transform = "translate(-50%, -50%)";
-    menu.style.display = "block";
-}
-
-// ---
+    // ---
 
     div.className = "fig";
     div.innerText = texto;
@@ -1113,103 +1113,276 @@ if (btnAjuda) {
 
 function gerarListaTrocas() {
 
-    let texto = "🤝 TENHO PARA TROCAR\n\n";
+    // ---
 
-    Object.values(grupos)
-        .flat()
-        .sort((a, b) => a.localeCompare(b))
-        .forEach(selecao => {
+    const mostrarTenho =
+        document
+            .getElementById("filtroTenho")
+            ?.checked ?? true;
 
-            let itens = [];
+    const mostrarProcuro =
+        document
+            .getElementById("filtroProcuro")
+            ?.checked ?? true;
 
-            for (let i = 1; i <= 20; i++) {
+    let texto = "";
 
-                const qtd =
-                    Number(
-                        localStorage.getItem(
-                            `${selecao}-${i}-rep`
-                        )
-                    ) || 0;
+    if (mostrarTenho) {
 
-                if (qtd > 0) {
+        texto += "🤝 TENHO PARA TROCAR\n\n";
+        // let texto = "🤝 TENHO PARA TROCAR\n\n";
 
-                    itens.push(
-                        `${String(i).padStart(2, '0')} (+${qtd})`
-                    );
+        Object.values(grupos)
+            .flat()
+            .sort((a, b) => a.localeCompare(b))
+            .forEach(selecao => {
+
+                let itens = [];
+
+                for (let i = 1; i <= 20; i++) {
+
+                    const qtd =
+                        Number(
+                            localStorage.getItem(
+                                `${selecao}-${i}-rep`
+                            )
+                        ) || 0;
+
+                    if (qtd > 0) {
+
+                        itens.push(
+                            `${String(i).padStart(2, '0')} (+${qtd})`
+                        );
+                    }
                 }
-            }
 
-            if (itens.length) {
+                if (itens.length) {
 
-                texto +=
-                    `${nomeSelecao(selecao).toUpperCase()}\n`;
+                    texto +=
+                        `${nomeSelecao(selecao).toUpperCase()}\n`;
 
-                const primeiraLinha =
-                    itens.slice(0, 10).join("   ");
+                    const primeiraLinha =
+                        itens.slice(0, 10).join("   ");
 
-                const segundaLinha =
-                    itens.slice(10).join("   ");
+                    const segundaLinha =
+                        itens.slice(10).join("   ");
 
-                texto += primeiraLinha;
+                    texto += primeiraLinha;
 
-                if (segundaLinha) {
+                    if (segundaLinha) {
 
-                    texto += "\n" + segundaLinha;
+                        texto += "\n" + segundaLinha;
+                    }
+
+                    texto += "\n\n";
                 }
+            });
 
-                texto += "\n\n";
-            }
-        });
+        // ---
 
-    texto +=
-        "\n🔍 PROCURO\n\n";
+        // ==========================
+        // FIGURINHAS ESPECIAIS
+        // ==========================
 
-    Object.values(grupos)
-        .flat()
-        .sort((a, b) => a.localeCompare(b))
-        .forEach(selecao => {
+        let especiais = [];
 
-            let faltantes = [];
+        for (let i = 0; i <= 19; i++) {
 
-            for (let i = 1; i <= 20; i++) {
+            const codigo =
+                "FWC " +
+                String(i).padStart(2, "0");
 
-                if (
+            const qtd =
+                Number(
                     localStorage.getItem(
-                        `${selecao}-${i}`
-                    ) !== "1"
-                ) {
+                        `${codigo}-rep`
+                    )
+                ) || 0;
 
-                    faltantes.push(
-                        String(i)
-                            .padStart(2, '0')
-                    );
-                }
+            if (qtd > 0) {
+
+                especiais.push(
+                    `${codigo} (+${qtd})`
+                );
             }
+        }
 
-            if (faltantes.length) {
+        if (especiais.length) {
 
-                texto +=
-                    `${nomeSelecao(selecao).toUpperCase()}\n`;
+            texto +=
+                `⭐ FWC - FIGURINHAS ESPECIAIS\n`;
 
-                const primeiraLinha =
-                    faltantes.slice(0, 10).join("   ");
+            texto += especiais.join("   ");
 
-                const segundaLinha =
-                    faltantes.slice(10).join("   ");
+            texto += "\n\n";
+        }
 
-                texto += primeiraLinha;
+        // ==========================
+        // FIGURINHAS COCA-COLA
+        // ==========================
 
-                if (segundaLinha) {
+        let coca = [];
 
-                    texto += "\n" + segundaLinha;
+        for (let i = 1; i <= 14; i++) {
+
+            const codigo =
+                "CC " +
+                String(i).padStart(2, "0");
+
+            const qtd =
+                Number(
+                    localStorage.getItem(
+                        `${codigo}-rep`
+                    )
+                ) || 0;
+
+            if (qtd > 0) {
+
+                coca.push(
+                    `${codigo} (+${qtd})`
+                );
+            }
+        }
+
+        if (coca.length) {
+
+            texto +=
+                `🥤 CC - FIGURINHAS COCA-COLA\n`;
+
+            texto += coca.join("   ");
+
+            texto += "\n\n";
+        }
+
+    }
+    // ---
+
+    if (mostrarProcuro) {
+
+        if (texto !== "") {
+
+            texto += "\n";
+        }
+
+        texto += "🔍 PROCURO\n\n";
+
+        // texto +=
+        //     "\n🔍 PROCURO\n\n";
+
+        Object.values(grupos)
+            .flat()
+            .sort((a, b) => a.localeCompare(b))
+            .forEach(selecao => {
+
+                let faltantes = [];
+
+                for (let i = 1; i <= 20; i++) {
+
+                    if (
+                        localStorage.getItem(
+                            `${selecao}-${i}`
+                        ) !== "1"
+                    ) {
+
+                        faltantes.push(
+                            String(i)
+                                .padStart(2, '0')
+                        );
+                    }
                 }
 
-                texto += "\n\n";
+                if (faltantes.length) {
+
+                    texto +=
+                        `${nomeSelecao(selecao).toUpperCase()}\n`;
+
+                    const primeiraLinha =
+                        faltantes.slice(0, 10).join("   ");
+
+                    const segundaLinha =
+                        faltantes.slice(10).join("   ");
+
+                    texto += primeiraLinha;
+
+                    if (segundaLinha) {
+
+                        texto += "\n" + segundaLinha;
+                    }
+
+                    texto += "\n\n";
+                }
+            });
+
+        // ---
+
+        // ==========================
+        // FIGURINHAS ESPECIAIS
+        // ==========================
+
+        let faltantesEspeciais = [];
+
+        for (let i = 0; i <= 19; i++) {
+
+            const codigo =
+                "FWC " +
+                String(i).padStart(2, "0");
+
+            if (
+                localStorage.getItem(codigo)
+                !== "1"
+            ) {
+
+                faltantesEspeciais.push(codigo);
             }
-        });
+        }
+
+        if (faltantesEspeciais.length) {
+
+            texto +=
+                `⭐ FWC - FIGURINHAS ESPECIAIS\n`;
+
+            texto += faltantesEspeciais.join("   ");
+
+            texto += "\n\n";
+        }
+
+        // ==========================
+        // FIGURINHAS COCA-COLA
+        // ==========================
+
+        let faltantesCoca = [];
+
+        for (let i = 1; i <= 14; i++) {
+
+            const codigo =
+                "CC " +
+                String(i).padStart(2, "0");
+
+            if (
+                localStorage.getItem(codigo)
+                !== "1"
+            ) {
+
+                faltantesCoca.push(codigo);
+            }
+        }
+
+        if (faltantesCoca.length) {
+
+            texto +=
+                `🥤 CC - FIGURINHAS COCA-COLA\n`;
+
+            texto += faltantesCoca.join("   ");
+
+            texto += "\n\n";
+        }
+
+    }
+    // ---
 
     return texto;
 }
+
 
 // ---
 
@@ -1262,12 +1435,12 @@ function gerarHtmlTrocas() {
 
                     <div class="tituloTroca">
 
-<img
-    class="bandeira"
-    src="${urlBandeira(selecao)}"
-    alt="${selecao}"
-    loading="lazy"
->
+                    <img
+                        class="bandeira"
+                        src="${urlBandeira(selecao)}"
+                        alt="${selecao}"
+                        loading="lazy"
+                    >
                         ${nomeSelecao(selecao).toUpperCase()}
 
                     </div>
@@ -1282,6 +1455,106 @@ function gerarHtmlTrocas() {
             `;
         }
     });
+
+    // ---
+
+    // ==========================
+    // FIGURINHAS ESPECIAIS
+    // ==========================
+
+    let especiais = [];
+
+    for (let i = 0; i <= 19; i++) {
+
+        const codigo =
+            "FWC " +
+            String(i).padStart(2, "0");
+
+        const qtd =
+            Number(
+                localStorage.getItem(
+                    `${codigo}-rep`
+                )
+            ) || 0;
+
+        if (qtd > 0) {
+
+            especiais.push(
+                `${codigo} (+${qtd})`
+            );
+        }
+    }
+
+    if (especiais.length) {
+
+        html += `
+        <div class="blocoTroca tipoTenho">
+
+            <div class="tituloTroca">
+
+                ⭐ FWC - FIGURINHAS ESPECIAIS
+
+            </div>
+
+            <div class="numerosTroca">
+
+                ${especiais.join(" • ")}
+
+            </div>
+
+        </div>
+    `;
+    }
+
+    // ==========================
+    // FIGURINHAS COCA-COLA
+    // ==========================
+
+    let coca = [];
+
+    for (let i = 1; i <= 14; i++) {
+
+        const codigo =
+            "CC " +
+            String(i).padStart(2, "0");
+
+        const qtd =
+            Number(
+                localStorage.getItem(
+                    `${codigo}-rep`
+                )
+            ) || 0;
+
+        if (qtd > 0) {
+
+            coca.push(
+                `${codigo} (+${qtd})`
+            );
+        }
+    }
+
+    if (coca.length) {
+
+        html += `
+        <div class="blocoTroca tipoTenho">
+
+            <div class="tituloTroca">
+
+                🥤 CC - FIGURINHAS COCA-COLA
+
+            </div>
+
+            <div class="numerosTroca">
+
+                ${coca.join(" • ")}
+
+            </div>
+
+        </div>
+    `;
+    }
+
+    // ---
 
     html += `
     <div class="tituloSecaoTroca">
@@ -1318,12 +1591,12 @@ function gerarHtmlTrocas() {
 
                     <div class="tituloTroca">
 
-<img
-    class="bandeira"
-    src="${urlBandeira(selecao)}"
-    alt="${selecao}"
-    loading="lazy"
->
+                    <img
+                        class="bandeira"
+                        src="${urlBandeira(selecao)}"
+                        alt="${selecao}"
+                        loading="lazy"
+                    >
                         ${nomeSelecao(selecao).toUpperCase()}
 
                     </div>
@@ -1338,6 +1611,94 @@ function gerarHtmlTrocas() {
             `;
         }
     });
+
+    // ---
+
+    // ==========================
+    // FIGURINHAS ESPECIAIS
+    // ==========================
+
+    let faltantesEspeciais = [];
+
+    for (let i = 0; i <= 19; i++) {
+
+        const codigo =
+            "FWC " +
+            String(i).padStart(2, "0");
+
+        if (
+            localStorage.getItem(codigo)
+            !== "1"
+        ) {
+
+            faltantesEspeciais.push(codigo);
+        }
+    }
+
+    if (faltantesEspeciais.length) {
+
+        html += `
+        <div class="blocoTroca tipoProcuro">
+
+            <div class="tituloTroca">
+
+                ⭐ FWC - FIGURINHAS ESPECIAIS
+
+            </div>
+
+            <div class="numerosTroca">
+
+                ${faltantesEspeciais.join(" • ")}
+
+            </div>
+
+        </div>
+    `;
+    }
+
+    // ==========================
+    // FIGURINHAS COCA-COLA
+    // ==========================
+
+    let faltantesCoca = [];
+
+    for (let i = 1; i <= 14; i++) {
+
+        const codigo =
+            "CC " +
+            String(i).padStart(2, "0");
+
+        if (
+            localStorage.getItem(codigo)
+            !== "1"
+        ) {
+
+            faltantesCoca.push(codigo);
+        }
+    }
+
+    if (faltantesCoca.length) {
+
+        html += `
+        <div class="blocoTroca tipoProcuro">
+
+            <div class="tituloTroca">
+
+                🥤 CC - FIGURINHAS COCA-COLA
+
+            </div>
+
+            <div class="numerosTroca">
+
+                ${faltantesCoca.join(" • ")}
+
+            </div>
+
+        </div>
+    `;
+    }
+
+    // ---
 
     return html;
 }
@@ -1482,6 +1843,37 @@ if (btnTrocas) {
 
 // ---
 
+// const copiar =
+//     document.getElementById(
+//         "copiarTrocas"
+//     );
+
+// if (copiar) {
+
+//     copiar.addEventListener(
+//         "click",
+//         async () => {
+
+//             await navigator
+//                 .clipboard
+//                 .writeText(
+//                     gerarListaTrocas()
+//                 );
+
+//             copiar.innerText =
+//                 "Copiado!";
+
+//             setTimeout(() => {
+
+//                 copiar.innerText =
+//                     "Copiar Lista";
+
+//             }, 2000);
+//         }
+//     );
+// }
+
+
 const copiar =
     document.getElementById(
         "copiarTrocas"
@@ -1493,21 +1885,45 @@ if (copiar) {
         "click",
         async () => {
 
-            await navigator
-                .clipboard
-                .writeText(
-                    gerarListaTrocas()
-                );
+            const texto =
+                gerarListaTrocas();
 
-            copiar.innerText =
-                "Copiado!";
+            try {
 
-            setTimeout(() => {
+                await navigator
+                    .clipboard
+                    .writeText(texto);
 
                 copiar.innerText =
-                    "Copiar Lista";
+                    "Copiado!";
 
-            }, 2000);
+                if (
+                    confirm(
+                        "✅ Lista copiada para a área de transferência.\n\nDeseja enviá-la pelo WhatsApp?"
+                    )
+                ) {
+
+                    window.open(
+                        "https://wa.me/?text=" +
+                        encodeURIComponent(texto),
+                        "_blank"
+                    );
+                }
+
+                setTimeout(() => {
+
+                    copiar.innerText =
+                        "Copiar Lista";
+
+                }, 2000);
+
+            } catch {
+
+                alert(
+                    "Não foi possível copiar a lista."
+                );
+
+            }
         }
     );
 }
