@@ -148,6 +148,13 @@ function paraExpoente(numero) {
         .join('');
 }
 
+
+const container = document.getElementById("container");
+
+function criarFigurinha(id, texto) {
+
+    const div = document.createElement("div");
+
 // ----
 
 function abrirMenuRepetidas() {
@@ -190,12 +197,6 @@ function abrirMenuRepetidas() {
 
 // ---
 
-const container = document.getElementById("container");
-
-function criarFigurinha(id, texto) {
-
-    const div = document.createElement("div");
-
     div.className = "fig";
     div.innerText = texto;
 
@@ -209,45 +210,6 @@ function criarFigurinha(id, texto) {
 
         abrirMenuRepetidas();
 
-        // if (!modoEdicao) {
-
-        //     mostrarAvisoBloqueado(div);
-
-        //     return;
-        // }
-
-        // figurinhaAtual = id;
-        // figurinhaDivAtual = div;
-
-        // const qtd =
-        //     Number(
-        //         localStorage.getItem(
-        //             `${id}-rep`
-        //         )
-        //     ) || 0;
-
-        // document.getElementById(
-        //     "tituloRepetida"
-        // ).innerText = texto;
-
-        // document.getElementById(
-        //     "qtdRep"
-        // ).innerText = qtd;
-
-        // const menu =
-        //     document.getElementById(
-        //         "popUpRepetidas"
-        //     );
-
-        // menu.style.left = "50%";
-
-        // menu.style.top = "50%";
-
-        // menu.style.transform =
-        //     "translate(-50%, -50%)";
-
-        // menu.style.display =
-        //     "block";
     });
 
     let timerPressionado;
