@@ -150,6 +150,46 @@ function paraExpoente(numero) {
 
 // ----
 
+function abrirMenuRepetidas() {
+
+    if (!modoEdicao) {
+
+        mostrarAvisoBloqueado(div);
+
+        return;
+    }
+
+    figurinhaAtual = id;
+    figurinhaDivAtual = div;
+
+    const qtd =
+        Number(
+            localStorage.getItem(
+                `${id}-rep`
+            )
+        ) || 0;
+
+    document.getElementById(
+        "tituloRepetida"
+    ).innerText = texto;
+
+    document.getElementById(
+        "qtdRep"
+    ).innerText = qtd;
+
+    const menu =
+        document.getElementById(
+            "popUpRepetidas"
+        );
+
+    menu.style.left = "50%";
+    menu.style.top = "50%";
+    menu.style.transform = "translate(-50%, -50%)";
+    menu.style.display = "block";
+}
+
+// ---
+
 const container = document.getElementById("container");
 
 function criarFigurinha(id, texto) {
@@ -167,46 +207,84 @@ function criarFigurinha(id, texto) {
 
         e.preventDefault();
 
-        if (!modoEdicao) {
+        abrirMenuRepetidas();
 
-            mostrarAvisoBloqueado(div);
+        // if (!modoEdicao) {
 
-            return;
-        }
+        //     mostrarAvisoBloqueado(div);
 
-        figurinhaAtual = id;
-        figurinhaDivAtual = div;
+        //     return;
+        // }
 
-        const qtd =
-            Number(
-                localStorage.getItem(
-                    `${id}-rep`
-                )
-            ) || 0;
+        // figurinhaAtual = id;
+        // figurinhaDivAtual = div;
 
-        document.getElementById(
-            "tituloRepetida"
-        ).innerText = texto;
+        // const qtd =
+        //     Number(
+        //         localStorage.getItem(
+        //             `${id}-rep`
+        //         )
+        //     ) || 0;
 
-        document.getElementById(
-            "qtdRep"
-        ).innerText = qtd;
+        // document.getElementById(
+        //     "tituloRepetida"
+        // ).innerText = texto;
 
-        const menu =
-            document.getElementById(
-                "popUpRepetidas"
-            );
+        // document.getElementById(
+        //     "qtdRep"
+        // ).innerText = qtd;
 
-        menu.style.left = "50%";
+        // const menu =
+        //     document.getElementById(
+        //         "popUpRepetidas"
+        //     );
 
-        menu.style.top = "50%";
+        // menu.style.left = "50%";
 
-        menu.style.transform =
-            "translate(-50%, -50%)";
+        // menu.style.top = "50%";
 
-        menu.style.display =
-            "block";
+        // menu.style.transform =
+        //     "translate(-50%, -50%)";
+
+        // menu.style.display =
+        //     "block";
     });
+
+    let timerPressionado;
+
+    // ---
+
+    div.addEventListener("touchstart", (e) => {
+
+        timerPressionado = setTimeout(() => {
+
+            e.preventDefault();
+
+            abrirMenuRepetidas();
+
+        }, 600);
+
+    }, { passive: false });
+
+    div.addEventListener("touchend", () => {
+
+        clearTimeout(timerPressionado);
+
+    });
+
+    div.addEventListener("touchmove", () => {
+
+        clearTimeout(timerPressionado);
+
+    });
+
+    div.addEventListener("touchcancel", () => {
+
+        clearTimeout(timerPressionado);
+
+    });
+
+    // ---
 
     // Carrega repetidas ao abrir a página
     atualizarVisualRepetida(div, id);
@@ -597,60 +675,6 @@ function atualizarTotal() {
 
     atualizarCocaCola();
 }
-
-// const busca = document.getElementById("busca");
-
-// if (busca) {
-
-//     busca.addEventListener("input", function () {
-
-//         const texto =
-//             this.value.trim().toLowerCase();
-
-//         document
-//             .querySelectorAll(".selecao")
-//             .forEach(selecao => {
-
-//                 const titulo =
-//                     selecao.querySelector("h3");
-
-//                 if (!titulo) {
-
-//                     selecao.style.display =
-//                         texto ? "none" : "";
-
-//                     return;
-//                 }
-
-//                 const nome =
-//                     titulo.textContent
-//                         .toLowerCase();
-
-//                 selecao.style.display =
-//                     nome.includes(texto)
-//                         ? ""
-//                         : "none";
-//             });
-
-//         document
-//             .querySelectorAll(".grupo")
-//             .forEach(grupo => {
-
-//                 const possuiSelecaoVisivel =
-//                     Array.from(
-//                         grupo.querySelectorAll(".selecao")
-//                     ).some(
-//                         selecao =>
-//                             selecao.style.display !== "none"
-//                     );
-
-//                 grupo.style.display =
-//                     possuiSelecaoVisivel
-//                         ? ""
-//                         : "none";
-//             });
-
-//     });
 
 // }
 
