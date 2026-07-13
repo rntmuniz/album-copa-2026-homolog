@@ -598,61 +598,147 @@ function atualizarTotal() {
     atualizarCocaCola();
 }
 
-const busca = document.getElementById("busca");
+// const busca = document.getElementById("busca");
 
-if (busca) {
+// if (busca) {
 
-    busca.addEventListener("input", function () {
+//     busca.addEventListener("input", function () {
 
-        const texto =
-            this.value.trim().toLowerCase();
+//         const texto =
+//             this.value.trim().toLowerCase();
 
-        document
-            .querySelectorAll(".selecao")
-            .forEach(selecao => {
+//         document
+//             .querySelectorAll(".selecao")
+//             .forEach(selecao => {
 
-                const titulo =
-                    selecao.querySelector("h3");
+//                 const titulo =
+//                     selecao.querySelector("h3");
 
-                if (!titulo) {
+//                 if (!titulo) {
 
-                    selecao.style.display =
-                        texto ? "none" : "";
+//                     selecao.style.display =
+//                         texto ? "none" : "";
 
-                    return;
+//                     return;
+//                 }
+
+//                 const nome =
+//                     titulo.textContent
+//                         .toLowerCase();
+
+//                 selecao.style.display =
+//                     nome.includes(texto)
+//                         ? ""
+//                         : "none";
+//             });
+
+//         document
+//             .querySelectorAll(".grupo")
+//             .forEach(grupo => {
+
+//                 const possuiSelecaoVisivel =
+//                     Array.from(
+//                         grupo.querySelectorAll(".selecao")
+//                     ).some(
+//                         selecao =>
+//                             selecao.style.display !== "none"
+//                     );
+
+//                 grupo.style.display =
+//                     possuiSelecaoVisivel
+//                         ? ""
+//                         : "none";
+//             });
+
+//     });
+
+// }
+
+busca.addEventListener("input", function () {
+
+    const texto = this.value.trim().toLowerCase();
+
+    document
+        .querySelectorAll(".selecao")
+        .forEach(selecao => {
+
+            let nome = "";
+
+            const tituloH3 = selecao.querySelector("h3");
+
+            if (tituloH3) {
+
+                nome = tituloH3.textContent.toLowerCase();
+
+            } else {
+
+                const card =
+                    selecao.closest(".card-body");
+
+                const tituloH2 =
+                    card?.querySelector("h2");
+
+                if (tituloH2) {
+
+                    nome = tituloH2.textContent.toLowerCase();
                 }
+            }
 
-                const nome =
-                    titulo.textContent
-                        .toLowerCase();
+            selecao.style.display =
+                nome.includes(texto)
+                    ? ""
+                    : "none";
+        });
 
-                selecao.style.display =
-                    nome.includes(texto)
-                        ? ""
-                        : "none";
-            });
+    document
+        .querySelectorAll(".grupo")
+        .forEach(grupo => {
 
-        document
-            .querySelectorAll(".grupo")
-            .forEach(grupo => {
+            const possuiSelecaoVisivel =
+                Array.from(
+                    grupo.querySelectorAll(".selecao")
+                ).some(
+                    selecao =>
+                        selecao.style.display !== "none"
+                );
 
-                const possuiSelecaoVisivel =
-                    Array.from(
-                        grupo.querySelectorAll(".selecao")
-                    ).some(
-                        selecao =>
-                            selecao.style.display !== "none"
-                    );
+            grupo.style.display =
+                possuiSelecaoVisivel
+                    ? ""
+                    : "none";
+        });
 
-                grupo.style.display =
-                    possuiSelecaoVisivel
-                        ? ""
-                        : "none";
-            });
+    const cardEspeciais =
+        document.getElementById("especiais")
+            ?.closest(".grupo-card");
 
-    });
+    if (cardEspeciais) {
 
-}
+        const nome =
+            "fwc figurinhas especiais";
+
+        cardEspeciais.style.display =
+            nome.includes(texto)
+                ? ""
+                : "none";
+    }
+
+    const cardCoca =
+        document.getElementById("cocacola")
+            ?.closest(".grupo-card");
+
+    if (cardCoca) {
+
+        const nome =
+            "cc figurinhas coca cola";
+
+        cardCoca.style.display =
+            nome.includes(texto)
+                ? ""
+                : "none";
+    }
+
+});
 
 // ---
 
